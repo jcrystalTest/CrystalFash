@@ -30,7 +30,7 @@ public class QueryProduct{
 	public static HelperBySize BySize = new HelperBySize();
 	public static class HelperBySize extends jcrystal.db.datastore.query.AbsBaseHelper<HelperBySize, Product>{
 		private HelperBySize(){
-			super(jcrystal.context.CrystalContext.get().datastore);
+			super(jcrystal.context.CrystalContext.get().DefaultDB());
 		}
 		@Override public HelperBySize create(){return new HelperBySize();}
 		@Override public Product create(com.google.appengine.api.datastore.Entity entidad){

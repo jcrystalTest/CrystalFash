@@ -13,6 +13,7 @@ public class ManagerCart {
 		CartItem i = new CartItem().product(product).quantity(quantity);
 		cart.items().add(i);
 		cart = updateCartTotal(cart);
+		cart.put();
 		return cart;
 	}
 
@@ -24,6 +25,7 @@ public class ManagerCart {
 	public static void addToFavorites(long cartId, Product p) {
 		Cart c = Cart.get(cartId);
 		c.favorites().add(p);
+		c.put();
 	}
 	public static List<Product> listFavorites(long cartId){
 		return Cart.get(cartId).favorites();
@@ -31,7 +33,7 @@ public class ManagerCart {
 	public static Cart createCart() {
 		return new Cart()
 				.subtotal(0)
-				.total(0);
+				.total(0).put();
 	}
 	
 	private static Cart updateCartTotal(Cart cart) {
