@@ -191,15 +191,9 @@ public class Cart implements Entity.DefaultDB{
 		return dev.jcrystal.crystalfash.entities.Product.Batch.getTxn(favorites$Key());
 	}
 	public double subtotal(){
-		if(!rawEntity.hasProperty("subtotal")){
-			rawEntity.setUnindexedProperty("subtotal", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "subtotal", 0);
 	}
 	public double total(){
-		if(!rawEntity.hasProperty("total")){
-			rawEntity.setUnindexedProperty("total", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "total", 0);
 	}
 	public static class CachedGetter{

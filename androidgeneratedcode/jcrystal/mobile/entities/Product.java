@@ -4,15 +4,15 @@ import jcrystal.mobile.entities.enums.*;
 import jcrystal.datetime.*;
 import static jcrystal.JSONUtils.*;
 public class Product implements ProductNormal,jcrystal.mobile.net.ISerializable{
-	private String image;
-	public String image(){return this.image;}
-	public void image(String val){image = val;}
 	private Long id;
 	public Long id(){return this.id;}
 	public void id(Long val){id = val;}
 	private String name;
 	public String name(){return this.name;}
 	public void name(String val){name = val;}
+	private String description;
+	public String description(){return this.description;}
+	public void description(String val){description = val;}
 	private long category;
 	public long category(){return this.category;}
 	public void category(long val){category = val;}
@@ -31,18 +31,22 @@ public class Product implements ProductNormal,jcrystal.mobile.net.ISerializable{
 	private long size;
 	public long size(){return this.size;}
 	public void size(long val){size = val;}
+	private String image;
+	public String image(){return this.image;}
+	public void image(String val){image = val;}
 	public Product(){
 	}
 	protected Product(org.json.JSONObject json)throws org.json.JSONException{
-		this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 		this.id = json.has("id")&&!json.isNull("id")?json.getLong("id"):null;
 		this.name = json.has("name")&&!json.isNull("name")?json.getString("name"):null;
+		this.description = json.has("description")&&!json.isNull("description")?json.getString("description"):null;
 		this.category = json.has("category")&&!json.isNull("category")?Categories.fromId(json.getInt("category")):null;
 		this.price = json.optDouble("price");
 		this.discount = json.optDouble("discount");
 		this.oldPrice = json.optDouble("oldPrice");
 		this.color = json.has("color")&&!json.isNull("color")?Color.fromId(json.getInt("color")):null;
 		this.size = json.has("size")&&!json.isNull("size")?Size.fromId(json.getInt("size")):null;
+		this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 	}
 	public Product(org.json.JSONObject json, JsonLevel level)throws org.json.JSONException{
 		if(level != null){
@@ -50,26 +54,29 @@ public class Product implements ProductNormal,jcrystal.mobile.net.ISerializable{
 				case NORMAL: {
 					this.id = json.has("id")&&!json.isNull("id")?json.getLong("id"):null;
 					this.name = json.has("name")&&!json.isNull("name")?json.getString("name"):null;
+					this.description = json.has("description")&&!json.isNull("description")?json.getString("description"):null;
 					this.category = json.has("category")&&!json.isNull("category")?Categories.fromId(json.getInt("category")):null;
 					this.price = json.optDouble("price");
 					this.discount = json.optDouble("discount");
 					this.oldPrice = json.optDouble("oldPrice");
 					this.color = json.has("color")&&!json.isNull("color")?Color.fromId(json.getInt("color")):null;
 					this.size = json.has("size")&&!json.isNull("size")?Size.fromId(json.getInt("size")):null;
+					this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 				}
 				break;
 			}
 		}
 		else{
-			this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 			this.id = json.has("id")&&!json.isNull("id")?json.getLong("id"):null;
 			this.name = json.has("name")&&!json.isNull("name")?json.getString("name"):null;
+			this.description = json.has("description")&&!json.isNull("description")?json.getString("description"):null;
 			this.category = json.has("category")&&!json.isNull("category")?Categories.fromId(json.getInt("category")):null;
 			this.price = json.optDouble("price");
 			this.discount = json.optDouble("discount");
 			this.oldPrice = json.optDouble("oldPrice");
 			this.color = json.has("color")&&!json.isNull("color")?Color.fromId(json.getInt("color")):null;
 			this.size = json.has("size")&&!json.isNull("size")?Size.fromId(json.getInt("size")):null;
+			this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 		}
 	}
 	@Override public void toJson(java.io.PrintStream _pw){

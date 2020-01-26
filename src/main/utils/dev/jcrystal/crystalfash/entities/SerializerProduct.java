@@ -56,18 +56,20 @@ public class SerializerProduct{
 		}
 		PrintWriterUtils.printJsonProp(_pw, false, "\"id\":", objeto.id());
 		PrintWriterUtils.printJsonProp(_pw, false, "\"name\":", objeto.name());
-		dev.jcrystal.crystalfash.entities.Categories val5 = objeto.category();
-		if(val5 != null){
-			PrintWriterUtils.print(_pw, ",\"category\":", val5.id);
-		}
-		dev.jcrystal.crystalfash.entities.Color val6 = objeto.color();
+		PrintWriterUtils.printJsonProp(_pw, false, "\"description\":", objeto.description());
+		dev.jcrystal.crystalfash.entities.Categories val6 = objeto.category();
 		if(val6 != null){
-			PrintWriterUtils.print(_pw, ",\"color\":", val6.id);
+			PrintWriterUtils.print(_pw, ",\"category\":", val6.id);
 		}
-		dev.jcrystal.crystalfash.entities.Size val7 = objeto.size();
+		dev.jcrystal.crystalfash.entities.Color val7 = objeto.color();
 		if(val7 != null){
-			PrintWriterUtils.print(_pw, ",\"size\":", val7.id);
+			PrintWriterUtils.print(_pw, ",\"color\":", val7.id);
 		}
+		dev.jcrystal.crystalfash.entities.Size val8 = objeto.size();
+		if(val8 != null){
+			PrintWriterUtils.print(_pw, ",\"size\":", val8.id);
+		}
+		PrintWriterUtils.printJsonProp(_pw, false, "\"image\":", objeto.image());
 		_pw.print("}");
 	}
 	public static void toJsonNormalProduct(java.io.PrintWriter _pw, long rol, jcrystal.manager.utils.FileWrapperResponse<java.util.List<Product>> lista)throws java.io.IOException{
@@ -92,18 +94,20 @@ public class SerializerProduct{
 		}
 		PrintWriterUtils.printJsonProp(_pw, false, "\"id\":", objeto.id());
 		PrintWriterUtils.printJsonProp(_pw, false, "\"name\":", objeto.name());
-		dev.jcrystal.crystalfash.entities.Categories val5 = objeto.category();
-		if(val5 != null){
-			PrintWriterUtils.print(_pw, ",\"category\":", val5.id);
-		}
-		dev.jcrystal.crystalfash.entities.Color val6 = objeto.color();
+		PrintWriterUtils.printJsonProp(_pw, false, "\"description\":", objeto.description());
+		dev.jcrystal.crystalfash.entities.Categories val6 = objeto.category();
 		if(val6 != null){
-			PrintWriterUtils.print(_pw, ",\"color\":", val6.id);
+			PrintWriterUtils.print(_pw, ",\"category\":", val6.id);
 		}
-		dev.jcrystal.crystalfash.entities.Size val7 = objeto.size();
+		dev.jcrystal.crystalfash.entities.Color val7 = objeto.color();
 		if(val7 != null){
-			PrintWriterUtils.print(_pw, ",\"size\":", val7.id);
+			PrintWriterUtils.print(_pw, ",\"color\":", val7.id);
 		}
+		dev.jcrystal.crystalfash.entities.Size val8 = objeto.size();
+		if(val8 != null){
+			PrintWriterUtils.print(_pw, ",\"size\":", val8.id);
+		}
+		PrintWriterUtils.printJsonProp(_pw, false, "\"image\":", objeto.image());
 		_pw.print("}");
 	}
 	public static void toJsonDetailProduct(java.io.PrintWriter _pw, long rol, jcrystal.manager.utils.FileWrapperResponse<java.util.List<Product>> lista)throws java.io.IOException{
@@ -128,18 +132,20 @@ public class SerializerProduct{
 		}
 		PrintWriterUtils.printJsonProp(_pw, false, "\"id\":", objeto.id());
 		PrintWriterUtils.printJsonProp(_pw, false, "\"name\":", objeto.name());
-		dev.jcrystal.crystalfash.entities.Categories val5 = objeto.category();
-		if(val5 != null){
-			PrintWriterUtils.print(_pw, ",\"category\":", val5.id);
-		}
-		dev.jcrystal.crystalfash.entities.Color val6 = objeto.color();
+		PrintWriterUtils.printJsonProp(_pw, false, "\"description\":", objeto.description());
+		dev.jcrystal.crystalfash.entities.Categories val6 = objeto.category();
 		if(val6 != null){
-			PrintWriterUtils.print(_pw, ",\"color\":", val6.id);
+			PrintWriterUtils.print(_pw, ",\"category\":", val6.id);
 		}
-		dev.jcrystal.crystalfash.entities.Size val7 = objeto.size();
+		dev.jcrystal.crystalfash.entities.Color val7 = objeto.color();
 		if(val7 != null){
-			PrintWriterUtils.print(_pw, ",\"size\":", val7.id);
+			PrintWriterUtils.print(_pw, ",\"color\":", val7.id);
 		}
+		dev.jcrystal.crystalfash.entities.Size val8 = objeto.size();
+		if(val8 != null){
+			PrintWriterUtils.print(_pw, ",\"size\":", val8.id);
+		}
+		PrintWriterUtils.printJsonProp(_pw, false, "\"image\":", objeto.image());
 		_pw.print("}");
 	}
 	public static void toJsonFullProduct(java.io.PrintWriter _pw, long rol, jcrystal.manager.utils.FileWrapperResponse<java.util.List<Product>> lista)throws java.io.IOException{

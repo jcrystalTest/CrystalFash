@@ -11,7 +11,7 @@ public enum Categories {
 		this.id = id;
 		this.name = name;
 	}
-	public static Categories fromId(int id) {
+	public static Categories fromId(long id) {
 		for (Categories val: Categories.values()) {
 			if (val.id==id) {
 				return val;

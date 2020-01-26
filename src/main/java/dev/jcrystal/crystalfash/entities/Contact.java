@@ -121,21 +121,12 @@ public class Contact implements Entity.DefaultDB{
 		return this;
 	}
 	public String name(){
-		if(!rawEntity.hasProperty("name")){
-			rawEntity.setUnindexedProperty("name", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "name");
 	}
 	public String email(){
-		if(!rawEntity.hasProperty("email")){
-			rawEntity.setUnindexedProperty("email", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "email");
 	}
 	public String message(){
-		if(!rawEntity.hasProperty("message")){
-			rawEntity.setUnindexedProperty("message", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "message");
 	}
 	public static class CachedGetter{

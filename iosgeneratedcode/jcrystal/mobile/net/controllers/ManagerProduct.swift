@@ -2,19 +2,19 @@ import Foundation
 import jCrystaliOSLib
 public class ManagerProduct{
 	/**
-	* /api/product/filterProductsBySize
+	* /api/product/filterProductsByCategory
 	**/
-	static func filterProductsBySize(size : Size!, onSuccess : @escaping ([ProductNormal])->(), onError : @escaping ((RequestError)->())){
+	static func filterProductsByCategory(category : Categories!, onSuccess : @escaping ([ProductNormal])->(), onError : @escaping ((RequestError)->())){
 		var params : String! = nil
-		if let _size = size {
+		if let _category = category {
 			if let _params = params {
-				params = _params + "&size=\(_size.id)"
+				params = _params + "&category=\(_category.id)"
 			}
 			else{
-				params = "?size=\(_size.id)"
+				params = "?category=\(_category.id)"
 			}
 		}
-		AbsDefaultManager.JSONObjectResp(url: "/api/product/filterProductsBySize" + (params ?? ""), onResponse: {(result) in 
+		AbsDefaultManager.JSONObjectResp(url: "/api/product/filterProductsByCategory" + (params ?? ""), onResponse: {(result) in 
 			let _array = result["r"] as! [[String : AnyObject]]
 			var _lista = [ProductNormal]()
 			for pos in 0 ..< _array.count{

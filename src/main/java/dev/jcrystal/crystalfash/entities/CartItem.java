@@ -131,9 +131,6 @@ public class CartItem implements Entity.DefaultDB{
 		return this;
 	}
 	public int quantity(){
-		if(!rawEntity.hasProperty("quantity")){
-			rawEntity.setUnindexedProperty("quantity", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "quantity");
 	}
 	public Long product$Key(){

@@ -16,17 +16,17 @@ public class SerializerProduct{
 		if((!Double.isInfinite(objeto.oldPrice()) && !Double.isNaN(objeto.oldPrice()))){
 			PrintWriterUtils.print(_pw, ",\"oldPrice\":", objeto.oldPrice());
 		}
-		String val3 = objeto.image();
+		Long val3 = objeto.id();
 		if(val3 != null){
-			PrintWriterUtils.print(_pw, ",\"image\":", jsonQuote(val3));
+			PrintWriterUtils.print(_pw, ",\"id\":", val3);
 		}
-		Long val4 = objeto.id();
+		String val4 = objeto.name();
 		if(val4 != null){
-			PrintWriterUtils.print(_pw, ",\"id\":", val4);
+			PrintWriterUtils.print(_pw, ",\"name\":", jsonQuote(val4));
 		}
-		String val5 = objeto.name();
+		String val5 = objeto.description();
 		if(val5 != null){
-			PrintWriterUtils.print(_pw, ",\"name\":", jsonQuote(val5));
+			PrintWriterUtils.print(_pw, ",\"description\":", jsonQuote(val5));
 		}
 		jcrystal.mobile.entities.enums.Categories val6 = objeto.category();
 		if(val6 != null){
@@ -39,6 +39,10 @@ public class SerializerProduct{
 		jcrystal.mobile.entities.enums.Size val8 = objeto.size();
 		if(val8 != null){
 			PrintWriterUtils.print(_pw, ",\"size\":", val8.id);
+		}
+		String val9 = objeto.image();
+		if(val9 != null){
+			PrintWriterUtils.print(_pw, ",\"image\":", jsonQuote(val9));
 		}
 		_pw.print("}");
 	}
@@ -67,17 +71,25 @@ public class SerializerProduct{
 		if(val4 != null){
 			PrintWriterUtils.print(_pw, ",\"name\":", jsonQuote(val4));
 		}
-		jcrystal.mobile.entities.enums.Categories val5 = objeto.category();
+		String val5 = objeto.description();
 		if(val5 != null){
-			PrintWriterUtils.print(_pw, ",\"category\":", val5.id);
+			PrintWriterUtils.print(_pw, ",\"description\":", jsonQuote(val5));
 		}
-		jcrystal.mobile.entities.enums.Color val6 = objeto.color();
+		jcrystal.mobile.entities.enums.Categories val6 = objeto.category();
 		if(val6 != null){
-			PrintWriterUtils.print(_pw, ",\"color\":", val6.id);
+			PrintWriterUtils.print(_pw, ",\"category\":", val6.id);
 		}
-		jcrystal.mobile.entities.enums.Size val7 = objeto.size();
+		jcrystal.mobile.entities.enums.Color val7 = objeto.color();
 		if(val7 != null){
-			PrintWriterUtils.print(_pw, ",\"size\":", val7.id);
+			PrintWriterUtils.print(_pw, ",\"color\":", val7.id);
+		}
+		jcrystal.mobile.entities.enums.Size val8 = objeto.size();
+		if(val8 != null){
+			PrintWriterUtils.print(_pw, ",\"size\":", val8.id);
+		}
+		String val9 = objeto.image();
+		if(val9 != null){
+			PrintWriterUtils.print(_pw, ",\"image\":", jsonQuote(val9));
 		}
 		_pw.print("}");
 	}

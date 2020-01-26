@@ -10,7 +10,7 @@ import jcrystal.reflection.annotations.IndexType;
 import jcrystal.reflection.annotations.jEntity;
 import jcrystal.server.Entity;
 
-@EntityIndex(name="bySize", value= {"size"})
+@EntityIndex(name="byCategory", value= {"category"})
 @jEntity
 public class Product implements Entity.DefaultDB{
 	
@@ -21,6 +21,9 @@ public class Product implements Entity.DefaultDB{
 	private static String name;
 	
 	@EntityProperty
+	private static String description;
+	
+	@EntityProperty(index = IndexType.MULTIPLE)
 	private static Categories category;
 	
 	@EntityProperty
@@ -35,10 +38,10 @@ public class Product implements Entity.DefaultDB{
 	@EntityProperty
 	private static Color color;
 	
-	@EntityProperty(index = IndexType.MULTIPLE)
+	@EntityProperty
 	private static Size size;
 	
-	@ClientAndroid @ClientIos @ClientWeb
+	@EntityProperty
 	private static String image;
 
 /* GEN */
@@ -141,12 +144,16 @@ public class Product implements Entity.DefaultDB{
 		rawEntity.setUnindexedProperty("name", name);
 		return this;
 	}
+	public Product description(String description){
+		rawEntity.setUnindexedProperty("description", description);
+		return this;
+	}
 	public Product category(dev.jcrystal.crystalfash.entities.Categories category){
 		if(category == null){
-			rawEntity.setUnindexedProperty("category", null);
+			rawEntity.setIndexedProperty("category", null);
 		}
 		else{
-			rawEntity.setUnindexedProperty("category", category.id);
+			rawEntity.setIndexedProperty("category", category.id);
 		}
 		return this;
 	}
@@ -173,57 +180,46 @@ public class Product implements Entity.DefaultDB{
 	}
 	public Product size(dev.jcrystal.crystalfash.entities.Size size){
 		if(size == null){
-			rawEntity.setIndexedProperty("size", null);
+			rawEntity.setUnindexedProperty("size", null);
 		}
 		else{
-			rawEntity.setIndexedProperty("size", size.id);
+			rawEntity.setUnindexedProperty("size", size.id);
 		}
+		return this;
+	}
+	public Product image(String image){
+		rawEntity.setUnindexedProperty("image", image);
 		return this;
 	}
 	public dev.jcrystal.crystalfash.entities.CartItem items(){
 		return dev.jcrystal.crystalfash.entities.CartItem.Query.Product.get(id());
 	}
 	public String name(){
-		if(!rawEntity.hasProperty("name")){
-			rawEntity.setUnindexedProperty("name", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "name");
 	}
+	public String description(){
+		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "description");
+	}
 	public dev.jcrystal.crystalfash.entities.Categories category(){
-		if(!rawEntity.hasProperty("category")){
-			rawEntity.setUnindexedProperty("category", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return Categories.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "category"));
 	}
 	public double price(){
-		if(!rawEntity.hasProperty("price")){
-			rawEntity.setUnindexedProperty("price", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "price", 0);
 	}
 	public double discount(){
-		if(!rawEntity.hasProperty("discount")){
-			rawEntity.setUnindexedProperty("discount", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "discount", 0);
 	}
 	public double oldPrice(){
-		if(!rawEntity.hasProperty("oldPrice")){
-			rawEntity.setUnindexedProperty("oldPrice", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "oldPrice", 0);
 	}
 	public dev.jcrystal.crystalfash.entities.Color color(){
-		if(!rawEntity.hasProperty("color")){
-			rawEntity.setUnindexedProperty("color", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return Color.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "color"));
 	}
 	public dev.jcrystal.crystalfash.entities.Size size(){
-		if(!rawEntity.hasProperty("size")){
-			rawEntity.setUnindexedProperty("size", new com.google.appengine.api.datastore.EmbeddedEntity());
-		}
 		return Size.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "size"));
+	}
+	public String image(){
+		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "image");
 	}
 	public static class CachedGetter{
 		private java.util.TreeMap<Long, Product> cache = new java.util.TreeMap<>();

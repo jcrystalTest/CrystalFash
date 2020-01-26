@@ -24,8 +24,8 @@ public class ManagerProduct {
 		});
 		return categories;
 	}
-	public static List<Product> filterProductsBySize(Size size){
-		return Product.Query.BySize.get(size);
+	public static List<Product> filterProductsByCategory(Categories category){
+		return Product.Query.ByCategory.get(category);
 	}
 
 }

@@ -11,14 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static jcrystal.utils.ServletUtils.*;
 @SuppressWarnings("unused")
-@javax.servlet.annotation.WebServlet(name = "SubServletProduct",urlPatterns = {"/api/product/filterProductsBySize", "/api/product/getCategories", "/api/product/getProductById", "/api/product/getProducts"})
+@javax.servlet.annotation.WebServlet(name = "SubServletProduct",urlPatterns = {"/api/product/filterProductsByCategory", "/api/product/getCategories", "/api/product/getProductById", "/api/product/getProducts"})
 public class SubServletProduct extends AbsSubServlet{
 	private static final long serialVersionUID = 1L;
 	private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(SubServletProduct.class.getName());
 	public void doGet(String path, HttpServletRequest req, HttpServletResponse resp) throws Exception{
 		switch(path){
-			case "/api/product/filterProductsBySize":{
-				dev_jcrysta_crystalfash_controllers_ManagerProduct_filterProductsBySize(req, resp);
+			case "/api/product/filterProductsByCategory":{
+				dev_jcrysta_crystalfash_controllers_ManagerProduct_filterProductsByCategory(req, resp);
 				break;
 			}
 			case "/api/product/getCategories":{
@@ -36,10 +36,10 @@ public class SubServletProduct extends AbsSubServlet{
 			default: send404(resp);break;
 		}
 	}
-	static void dev_jcrysta_crystalfash_controllers_ManagerProduct_filterProductsBySize(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		Long $long_size = optLong(req, "size");
-		dev.jcrystal.crystalfash.entities.Size size = $long_size==null?null:dev.jcrystal.crystalfash.entities.Size.fromId($long_size);
-		java.util.List<dev.jcrystal.crystalfash.entities.Product> $salida = dev.jcrysta.crystalfash.controllers.ManagerProduct.filterProductsBySize(size);
+	static void dev_jcrysta_crystalfash_controllers_ManagerProduct_filterProductsByCategory(HttpServletRequest req, HttpServletResponse resp)throws Exception{
+		Long $long_category = optLong(req, "category");
+		dev.jcrystal.crystalfash.entities.Categories category = $long_category==null?null:dev.jcrystal.crystalfash.entities.Categories.fromId($long_category);
+		java.util.List<dev.jcrystal.crystalfash.entities.Product> $salida = dev.jcrysta.crystalfash.controllers.ManagerProduct.filterProductsByCategory(category);
 		java.io.PrintWriter _pw = resp.getWriter();
 		_pw.print("{\"success\":1, \"r\":");
 		dev.jcrystal.crystalfash.entities.SerializerProduct.toJsonNormalProduct(_pw, 0,  $salida);

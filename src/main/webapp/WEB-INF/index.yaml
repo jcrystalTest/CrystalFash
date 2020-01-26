@@ -3,5 +3,5 @@ indexes:
 - kind: Product
   ancestor: no
   properties:
-  - name: size
+  - name: category
     direction: desc

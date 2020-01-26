@@ -9,35 +9,35 @@ import android.os.AsyncTask;
 import static jcrystal.JSONUtils.*;
 public class ManagerProduct{
 	/**
-	* /api/product/filterProductsBySize
+	* /api/product/filterProductsByCategory
 	**/
-	public static AsyncTask filterProductsBySize(android.app.Activity $activity, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
-		return filterProductsBySize($activity, (androidx.fragment.app.Fragment)null, size, onSuccess, onError).exec();
+	public static AsyncTask filterProductsByCategory(android.app.Activity $activity, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
+		return filterProductsByCategory($activity, (androidx.fragment.app.Fragment)null, category, onSuccess, onError).exec();
 	}
-	public static AsyncTask filterProductsBySize(androidx.fragment.app.Fragment $fragment, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
-		return filterProductsBySize(null, $fragment, size, onSuccess, onError).exec();
+	public static AsyncTask filterProductsByCategory(androidx.fragment.app.Fragment $fragment, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
+		return filterProductsByCategory(null, $fragment, category, onSuccess, onError).exec();
 	}
-	public static <T extends androidx.fragment.app.Fragment & OnErrorListener> AsyncTask filterProductsBySize(T $fragment, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
-		return filterProductsBySize(null, $fragment, size, onSuccess, $fragment).exec();
+	public static <T extends androidx.fragment.app.Fragment & OnErrorListener> AsyncTask filterProductsByCategory(T $fragment, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
+		return filterProductsByCategory(null, $fragment, category, onSuccess, $fragment).exec();
 	}
-	public static <T extends android.app.Activity & OnErrorListener> AsyncTask filterProductsBySize(T $activity, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
-		return filterProductsBySize($activity, (androidx.fragment.app.Fragment)null, size, onSuccess, $activity).exec();
+	public static <T extends android.app.Activity & OnErrorListener> AsyncTask filterProductsByCategory(T $activity, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
+		return filterProductsByCategory($activity, (androidx.fragment.app.Fragment)null, category, onSuccess, $activity).exec();
 	}
-	public static void filterProductsBySize(NetChain $chain, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
+	public static void filterProductsByCategory(NetChain $chain, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess){
 		if($chain.fragment != null){
-			$chain.add(filterProductsBySize(null, $chain.fragment, size, onSuccess, $chain));
+			$chain.add(filterProductsByCategory(null, $chain.fragment, category, onSuccess, $chain));
 		}
 		else{
-			$chain.add(filterProductsBySize($chain.activity, (androidx.fragment.app.Fragment)null, size, onSuccess, $chain));
+			$chain.add(filterProductsByCategory($chain.activity, (androidx.fragment.app.Fragment)null, category, onSuccess, $chain));
 		}
 	}
-	private static NetTask<org.json.JSONObject> filterProductsBySize(android.app.Activity $activity, androidx.fragment.app.Fragment $fragment, Size size, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
+	private static NetTask<org.json.JSONObject> filterProductsByCategory(android.app.Activity $activity, androidx.fragment.app.Fragment $fragment, Categories category, On1SuccessListener<java.util.List<jcrystal.mobile.entities.ProductNormal>> onSuccess, OnErrorListener onError){
 		return new AbsDefaultManager.JSONObjectResp($activity, $fragment, onError){
 			@Override protected String getUrl()throws java.io.UnsupportedEncodingException{
-				String ruta = "/api/product/filterProductsBySize";
+				String ruta = "/api/product/filterProductsByCategory";
 				String params = null;
-				if(size != null)
-					params = (params==null?"?":(params + "&")) + "size=" + size.id;
+				if(category != null)
+					params = (params==null?"?":(params + "&")) + "category=" + category.id;
 				if(params != null)ruta+=params;
 				return ruta;
 			}
