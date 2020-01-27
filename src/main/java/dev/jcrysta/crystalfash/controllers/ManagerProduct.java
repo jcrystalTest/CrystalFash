@@ -25,7 +25,7 @@ public class ManagerProduct {
 		return categories;
 	}
 	public static List<Product> filterProductsByCategory(Categories category){
-		return Product.Query.ByCategory.get(category);
+		return Product.Query.Category.get(category);
 	}
 
 }

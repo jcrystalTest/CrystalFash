@@ -10,7 +10,6 @@ import jcrystal.reflection.annotations.IndexType;
 import jcrystal.reflection.annotations.jEntity;
 import jcrystal.server.Entity;
 
-@EntityIndex(name="byCategory", value= {"category"})
 @jEntity
 public class Product implements Entity.DefaultDB{
 	

@@ -27,37 +27,6 @@ public class QueryProduct{
 			return processQueryUnique(q, filtro);
 		}
 	}
-	public static HelperByCategory ByCategory = new HelperByCategory();
-	public static class HelperByCategory extends jcrystal.db.datastore.query.AbsBaseHelper<HelperByCategory, Product>{
-		private HelperByCategory(){
-			super(jcrystal.context.CrystalContext.get().DefaultDB());
-		}
-		@Override public HelperByCategory create(){return new HelperByCategory();}
-		@Override public Product create(com.google.appengine.api.datastore.Entity entidad){
-			return new Product(entidad);
-		}
-		public java.util.List<Product> get(dev.jcrystal.crystalfash.entities.Categories category){
-			java.util.List<com.google.appengine.api.datastore.Query.Filter> subFilters = new java.util.ArrayList<>(1);
-			if(category != null){
-				subFilters.add(new com.google.appengine.api.datastore.Query.FilterPredicate("category", com.google.appengine.api.datastore.Query.FilterOperator.EQUAL, category.id));
-			}
-			com.google.appengine.api.datastore.Query.Filter f = com.google.appengine.api.datastore.Query.CompositeFilterOperator.AND.of(subFilters);
-			com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query(ENTITY_NAME).setFilter(f);
-			return processQuery(q);
-		}
-		public java.util.List<Product> get(dev.jcrystal.crystalfash.entities.Categories category, dev.jcrystal.crystalfash.entities.Categories upperCategory){
-			java.util.List<com.google.appengine.api.datastore.Query.Filter> subFilters = new java.util.ArrayList<>(1);
-			if(category != null){
-				subFilters.add(new com.google.appengine.api.datastore.Query.FilterPredicate("category", com.google.appengine.api.datastore.Query.FilterOperator.GREATER_THAN_OR_EQUAL, category.id));
-			}
-			if(upperCategory != null){
-				subFilters.add(new com.google.appengine.api.datastore.Query.FilterPredicate("category", com.google.appengine.api.datastore.Query.FilterOperator.LESS_THAN, upperCategory.id));
-			}
-			com.google.appengine.api.datastore.Query.Filter f = com.google.appengine.api.datastore.Query.CompositeFilterOperator.AND.of(subFilters);
-			com.google.appengine.api.datastore.Query q = new com.google.appengine.api.datastore.Query(ENTITY_NAME).setFilter(f);
-			return processQuery(q);
-		}
-	}
 	public static java.util.ArrayList<Product> getAll(){
 		return getAll((java.util.function.Predicate<Product>)null);
 	}
