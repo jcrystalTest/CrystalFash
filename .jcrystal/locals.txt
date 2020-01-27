@@ -1,4 +1,0 @@
-#Sun Jan 26 14:11:10 COT 2020
-android.path=./androidgeneratedcode
-ios.path=./iosgeneratedcode
-web.path=./angulargeneratedcode
