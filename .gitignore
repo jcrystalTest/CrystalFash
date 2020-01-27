@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!.jcrystal/jcrystal.jar
 *.war
 *.nar
 *.ear
