@@ -15,6 +15,9 @@ public class AbsSubServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(AbsSubServlet.class.getName());
 	public final void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(req.getHeader("Origin") != null){
+			resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+		}
 		final String path = req.getServletPath();
 		resp.setCharacterEncoding("UTF-8");
 		try{
@@ -38,6 +41,9 @@ public class AbsSubServlet extends HttpServlet{
 		}
 	}
 	public final void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		if(req.getHeader("Origin") != null){
+			resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+		}
 		final String path = req.getServletPath();
 		resp.setCharacterEncoding("UTF-8");
 		try{
@@ -59,6 +65,13 @@ public class AbsSubServlet extends HttpServlet{
 			resp.setStatus(500);
 			log.log(java.util.logging.Level.SEVERE,"error", ex);
 		}
+	}
+	public void doOptions(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+		resp.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+		resp.setHeader("Access-Control-Allow-Credentials", "true");
+		resp.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+		resp.setHeader("Access-Control-Max-Age", "3600");
+		resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept, X-Requested-With, remember-me");
 	}
 	public void doGet(String path, HttpServletRequest req, HttpServletResponse resp)throws Exception{
 	}

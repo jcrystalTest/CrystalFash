@@ -20,7 +20,7 @@
 			<dependency>
 				<groupId>com.google.cloud</groupId>
 				<artifactId>google-cloud-bom</artifactId>
-				<version>0.120.2-alpha</version>
+				<version>0.104.0-alpha</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -34,7 +34,7 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency> 
+		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.1</version>
@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.9.77</version>
+			<version>1.9.76</version>
 		</dependency>
 		<!-- Test Dependencies -->
 		<dependency>
@@ -58,14 +58,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-		    <groupId>com.github.gasotelo</groupId>
-		    <artifactId>jCrystalUtils</artifactId>
-		    <version>4e5338c250</version>
+			<groupId>com.github.gasotelo</groupId>
+			<artifactId>jCrystalUtils</artifactId>
+			<version>4e5338c250</version>
 		</dependency>
 		<dependency>
-		    <groupId>com.github.gasotelo</groupId>
-		    <artifactId>CrystalGAEServerUtils</artifactId>
-		    <version>3665e8f4b4</version>
+			<groupId>com.github.gasotelo</groupId>
+			<artifactId>CrystalGAEServerUtils</artifactId>
+			<version>3665e8f4b4</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -10,7 +10,7 @@ public class JCrystalConfig {
 	
 	public static void config(){
 		//SERVER.firebaseKey = "your firebase key file.json";//It must be placed on WEB-INF
-		
+		SERVER.DEBUG.CORS = true;
 		addAngularExample();
 		addAndroidExample();
 		addSwiftiOSExample();
