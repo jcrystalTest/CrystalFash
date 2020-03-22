@@ -44,7 +44,6 @@ public class Product implements Entity.DefaultDB{
 	private static String image;
 
 /* GEN */
-	public static final String ENTITY_NAME = "Product";
 	protected final com.google.appengine.api.datastore.Entity rawEntity;
 	public final com.google.appengine.api.datastore.Entity getRawEntity(){return rawEntity;}
 	public Product(com.google.appengine.api.datastore.Entity rawEntity){
@@ -64,80 +63,44 @@ public class Product implements Entity.DefaultDB{
 		return rawEntity.getKey().getId();
 	}
 	public Product put(){
-		jcrystal.context.CrystalContext.get().DefaultDB().service.put(null, rawEntity);
-		return this;
-	}
-	public Product putTxn(){
 		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
 		$ctx.DefaultDB().service.put($ctx.DefaultDB().getTxn(), rawEntity);
 		return this;
 	}
-	public static com.google.appengine.api.datastore.Entity rawGetTxn(Long id){
-		if(null == id){return null;}
+	public static com.google.appengine.api.datastore.Entity rawGet(com.google.appengine.api.datastore.Key $key){
+		if($key == null){return null;}
 		try{
-			jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-			return $ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), Product.Key.createRawKey(id));
+			return jcrystal.context.CrystalContext.get().DefaultDB().get($key);
 		}
 		catch(com.google.appengine.api.datastore.EntityNotFoundException | java.lang.IllegalArgumentException e){
 			return null;
 		}
-	}
-	public static com.google.appengine.api.datastore.Entity rawGet(Long id){
-		if(null == id){return null;}
-		try{
-			return jcrystal.context.CrystalContext.get().DefaultDB().service.get(null, Product.Key.createRawKey(id));
-		}
-		catch(com.google.appengine.api.datastore.EntityNotFoundException | java.lang.IllegalArgumentException e){
-			return null;
-		}
-	}
-	public static Product get(Long id){
-		com.google.appengine.api.datastore.Entity ent = rawGet(id);
-		if(ent == null)return null;
-		return new Product(ent);
-	}
-	public static Product getTxn(Long id){
-		com.google.appengine.api.datastore.Entity ent = rawGetTxn(id);
-		if(ent == null)return null;
-		return new Product(ent);
 	}
 	public static Product get(com.google.appengine.api.datastore.Key $key){
-		if($key == null){return null;}
-		try{
-			return new Product(jcrystal.context.CrystalContext.get().DefaultDB().service.get(null, $key));
-		}
-		catch(com.google.appengine.api.datastore.EntityNotFoundException | java.lang.IllegalArgumentException e){
-			return null;
-		}
+		com.google.appengine.api.datastore.Entity ent = rawGet($key);
+		if(ent == null)return null;
+		return new Product(ent);
 	}
-	public static Product getTxn(com.google.appengine.api.datastore.Key $key){
-		if($key == null){return null;}
-		try{
-			jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-			return new Product($ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), $key));
-		}
-		catch(com.google.appengine.api.datastore.EntityNotFoundException | java.lang.IllegalArgumentException e){
-			return null;
-		}
+	public static Product get(Long id){
+		com.google.appengine.api.datastore.Entity ent = rawGet(Key.createRawKey(id));
+		if(ent == null)return null;
+		return new Product(ent);
 	}
 	public static boolean exist(Long id){
-		com.google.appengine.api.datastore.Entity ent = rawGet(id);
-		return ent != null;
+		return rawGet(Key.createRawKey(id)) != null;
+	}
+	public static Product tryGet(com.google.appengine.api.datastore.Key $key){
+		com.google.appengine.api.datastore.Entity ent = rawGet($key);
+		if(ent == null)throw new jcrystal.utils.InternalException(17, "Invalid identifier");
+		return new Product(ent);
 	}
 	public static Product tryGet(Long id){
-		com.google.appengine.api.datastore.Entity ent = rawGet(id);
-		if(ent == null)throw new jcrystal.utils.InternalException(17, "Identificador invalido");
-		return new Product(ent);
+		return tryGet(Key.createRawKey(id));
 	}
 	public static Product tryGet(Long id, Product $defValue){
-		com.google.appengine.api.datastore.Entity ent = rawGet(id);
+		Product ent = get(id);
 		if(ent == null)return $defValue;
-		return new Product(ent);
-	}
-	public static Product tryGetTxn(Long id){
-		com.google.appengine.api.datastore.Entity ent = rawGetTxn(id);
-		if(ent == null)throw new jcrystal.utils.InternalException(17, "Identificador invalido");
-		return new Product(ent);
+		return ent;
 	}
 	public Product name(String name){
 		rawEntity.setUnindexedProperty("name", name);
@@ -191,7 +154,7 @@ public class Product implements Entity.DefaultDB{
 		return this;
 	}
 	public dev.jcrystal.crystalfash.entities.CartItem items(){
-		return dev.jcrystal.crystalfash.entities.CartItem.Query.Product.get(id());
+		return dev.jcrystal.crystalfash.entities.CartItem.Query.product(id());
 	}
 	public String name(){
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "name");
@@ -200,22 +163,22 @@ public class Product implements Entity.DefaultDB{
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "description");
 	}
 	public dev.jcrystal.crystalfash.entities.Categories category(){
-		return Categories.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "category"));
+		return dev.jcrystal.crystalfash.entities.UtilsCategories.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "category"));
 	}
 	public double price(){
-		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "price", 0);
+		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "price", 0.0);
 	}
 	public double discount(){
-		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "discount", 0);
+		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "discount", 0.0);
 	}
 	public double oldPrice(){
-		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "oldPrice", 0);
+		return jcrystal.db.datastore.EntityUtils.getDouble(rawEntity, "oldPrice", 0.0);
 	}
 	public dev.jcrystal.crystalfash.entities.Color color(){
-		return Color.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "color"));
+		return dev.jcrystal.crystalfash.entities.UtilsColor.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "color"));
 	}
 	public dev.jcrystal.crystalfash.entities.Size size(){
-		return Size.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "size"));
+		return dev.jcrystal.crystalfash.entities.UtilsSize.fromId(jcrystal.db.datastore.EntityUtils.getInt(rawEntity, "size"));
 	}
 	public String image(){
 		return jcrystal.db.datastore.EntityUtils.getString(rawEntity, "image");
@@ -232,14 +195,41 @@ public class Product implements Entity.DefaultDB{
 	}
 	public static class Post extends PostProduct{}
 	public static class Serializer extends SerializerProduct{}
-	public static class Query extends QueryProduct{}
+	public static QueryProduct Query = new QueryProduct();
+	public static QueryProduct Query(com.google.appengine.api.datastore.Key ancestor){ return new QueryProduct(ancestor); }
 	public static class Batch extends BatchProduct{}
-	public static class Key{
-		private Key(){}
-		public static com.google.appengine.api.datastore.Key createRawKey(Long id){
-			return com.google.appengine.api.datastore.KeyFactory.createKey(ENTITY_NAME, id);
+	public static class Meta extends MetaProduct{}
+	public static java.util.List<Product> convertRawList(java.util.List<com.google.appengine.api.datastore.Entity> rawData){
+		if(rawData == null){return null;}
+		else{
+			java.util.ArrayList<Product> ret = new java.util.ArrayList<>();
+			for(com.google.appengine.api.datastore.Entity data : rawData){
+				ret.add(new Product(data));
+			}
+			return ret;
 		}
 	}
-	public static class Meta extends MetaProduct{}
+	public static final String ENTITY_NAME = "Product";
+	public static class Key{
+		private Key(){}
+		public static com.google.appengine.api.datastore.Key cloneKey(com.google.appengine.api.datastore.Key rawKey){
+			return Product.Key.createRawKey(rawKey.getId());
+		}
+		public static com.google.appengine.api.datastore.Key createRawKey(String entityName, Long id){
+			if(id == null){
+				return null;
+			}
+			return com.google.appengine.api.datastore.KeyFactory.createKey(entityName, id);
+		}
+		public static com.google.appengine.api.datastore.Key createRawKey(Long id){
+			if(id == null){
+				return null;
+			}
+			return com.google.appengine.api.datastore.KeyFactory.createKey(ENTITY_NAME, id);
+		}
+		public static final Long getId(com.google.appengine.api.datastore.Key rawKey){
+			return rawKey.getId();
+		}
+	}
 /* END */
 }

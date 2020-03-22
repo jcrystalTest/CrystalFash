@@ -4,19 +4,25 @@ import jcrystal.utils.ValidationException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import static jcrystal.utils.ServletUtils.*;
-@javax.servlet.annotation.WebServlet(name = "ServletPush",urlPatterns = {"jcrystal/async"})
+@javax.servlet.annotation.WebServlet(name = "ServletjCrystalAsync",urlPatterns = {"/jcrystal/async"})
 public class ServletJCrystal extends HttpServlet{
 	private static final long serialVersionUID = 2712227315844587832L;
 	private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(ServletJCrystal.class.getName());
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-		final String path = req.getPathInfo();
+		if((!"0.1.0.2".equals(req.getRemoteAddr()) && com.google.appengine.api.utils.SystemProperty.environment.value() == com.google.appengine.api.utils.SystemProperty.Environment.Value.Production)){
+			resp.setStatus(401);
+			return;
+		}
+		final String path = req.getServletPath();
 		resp.setContentType("application/json");
 		resp.setCharacterEncoding("UTF-8");
 		try{
 			switch(path){
-				case "jcrystal/async" : {
+				case "/jcrystal/async" : {
 					jcrystal.queue.Async.dequeue(req);
+					resp.setStatus(200);
 					resp.getWriter().print("{\"success\":1}");
+					break;
 				}
 				default: send404(resp);break;
 			}

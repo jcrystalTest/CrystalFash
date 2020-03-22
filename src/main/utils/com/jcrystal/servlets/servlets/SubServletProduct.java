@@ -66,7 +66,7 @@ public class SubServletProduct extends AbsSubServlet{
 		}
 	}
 	static void dev_jcrysta_crystalfash_controllers_ManagerProduct_getProducts(HttpServletRequest req, HttpServletResponse resp)throws Exception{
-		java.util.ArrayList<dev.jcrystal.crystalfash.entities.Product> $salida = dev.jcrysta.crystalfash.controllers.ManagerProduct.getProducts();
+		java.util.List<dev.jcrystal.crystalfash.entities.Product> $salida = dev.jcrysta.crystalfash.controllers.ManagerProduct.getProducts();
 		java.io.PrintWriter _pw = resp.getWriter();
 		_pw.print("{\"success\":1, \"r\":");
 		dev.jcrystal.crystalfash.entities.SerializerProduct.toJsonNormalProduct(_pw, 0,  $salida);

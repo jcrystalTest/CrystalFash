@@ -14,6 +14,28 @@ public class PostContact{
 			this.email = json.has("email")&&!json.isNull("email")?json.getString("email"):null;
 			this.message = json.has("message")&&!json.isNull("message")?json.getString("message"):null;
 		}
+		public static Normal getFromNormal(org.json.JSONObject json){
+			if(json == null){
+				return null;
+			}
+			return new Normal(json);
+		}
+		public static java.util.List<Normal> getFromNormal(org.json.JSONArray json){
+			if(json == null){return null;}
+			java.util.ArrayList<Normal> ret = new java.util.ArrayList<>(json.length());
+			for(int pos = 0; pos < json.length(); pos++){
+				ret.add(new Normal(json.getJSONObject(pos)));
+			}
+			return ret;
+		}
+		public static java.util.List<Normal> getFromNormal(java.util.List<Contact> data){
+			if(data == null){return null;}
+			java.util.ArrayList<Normal> ret = new java.util.ArrayList<>(data.size());
+			for(int pos = 0; pos < data.size(); pos++){
+				ret.add(new Normal(data.get(pos)));
+			}
+			return ret;
+		}
 		public Normal(dev.jcrystal.crystalfash.entities.Contact entidad){
 			this.name = entidad.name();
 			this.email = entidad.email();

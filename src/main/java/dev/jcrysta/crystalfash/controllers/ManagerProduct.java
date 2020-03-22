@@ -13,7 +13,7 @@ public class ManagerProduct {
 		Product p = Product.get(id);
 		return p;
 	}
-	public static ArrayList<Product> getProducts(){
+	public static List<Product> getProducts(){
 		return Product.Query.getAll();
 	}
 	public static ArrayList<String> getCategories(){
@@ -25,7 +25,7 @@ public class ManagerProduct {
 		return categories;
 	}
 	public static List<Product> filterProductsByCategory(Categories category){
-		return Product.Query.Category.get(category);
+		return Product.Query.category(category);
 	}
 
 }

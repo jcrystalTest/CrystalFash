@@ -13,16 +13,12 @@ public class BatchProduct{
 	public static java.util.List<Product> get(java.util.Collection<Long> it){
 		if(it == null || it.isEmpty()){return new java.util.ArrayList<>();}
 		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-		return $ctx.DefaultDB().service.get(null, new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Product.Key.createRawKey(v); }}).values().stream().map(ent->new Product(ent)).collect(java.util.stream.Collectors.toList());
+		return $ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Product.Key.createRawKey(v); }}).values().stream().map(ent->new Product(ent)).collect(java.util.stream.Collectors.toList());
 	}
 	public static java.util.List<Product> getFromKeys(Iterable<com.google.appengine.api.datastore.Key> keys){
 		java.util.List<Product> ret = new java.util.ArrayList<>();
 		for(com.google.appengine.api.datastore.Entity ent : jcrystal.context.CrystalContext.get().DefaultDB().service.get(null, keys).values())ret.add(new Product(ent));
 		return ret;
-	}
-	public static java.util.List<Product> getTxn(java.util.Collection<Long> it){
-		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-		return $ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Product.Key.createRawKey(v); }}).values().stream().map(ent->new Product(ent)).collect(java.util.stream.Collectors.toList());
 	}
 	public static void put(java.lang.Iterable<Product> it){
 		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();

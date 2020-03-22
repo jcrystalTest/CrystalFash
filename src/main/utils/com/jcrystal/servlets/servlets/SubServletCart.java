@@ -46,7 +46,7 @@ public class SubServletCart extends AbsSubServlet{
 		Long idProduct = optLong(req, "idProduct");
 		dev.jcrystal.crystalfash.entities.Product product = dev.jcrystal.crystalfash.entities.Product.get(idProduct);
 		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		dev.jcrystal.crystalfash.entities.Cart $salida = dev.jcrysta.crystalfash.controllers.ManagerCart.addToCart(cart,product,quantity);
+		dev.jcrystal.crystalfash.entities.Cart $salida = dev.jcrysta.crystalfash.controllers.ManagerCart.addToCart(cart, product, quantity);
 		if($salida != null){
 			java.io.PrintWriter _pw = resp.getWriter();
 			_pw.print("{\"success\":1, \"r\":");
@@ -61,7 +61,7 @@ public class SubServletCart extends AbsSubServlet{
 		long cartId = Long.parseLong(req.getParameter("cartId"));
 		Long idP = optLong(req, "idP");
 		dev.jcrystal.crystalfash.entities.Product p = dev.jcrystal.crystalfash.entities.Product.get(idP);
-		dev.jcrysta.crystalfash.controllers.ManagerCart.addToFavorites(cartId,p);
+		dev.jcrysta.crystalfash.controllers.ManagerCart.addToFavorites(cartId, p);
 		resp.getWriter().print("{\"success\":1}");
 	}
 	static void dev_jcrysta_crystalfash_controllers_ManagerCart_createCart(HttpServletRequest req, HttpServletResponse resp)throws Exception{

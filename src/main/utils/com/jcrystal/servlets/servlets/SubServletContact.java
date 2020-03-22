@@ -28,7 +28,7 @@ public class SubServletContact extends AbsSubServlet{
 		String name = req.getParameter("name");
 		String email = req.getParameter("email");
 		String message = req.getParameter("message");
-		dev.jcrysta.crystalfash.controllers.ManagerContact.contact(name,email,message);
+		dev.jcrysta.crystalfash.controllers.ManagerContact.contact(name, email, message);
 		resp.getWriter().print("{\"success\":1}");
 	}
 }

@@ -1,16 +1,14 @@
-package dev.jcrystal.crystalfash.entities;
+package dev.jcrystal.crystalfash.security;
 import jcrystal.reflection.annotations.Post;
 import jcrystal.datetime.*;
 @SuppressWarnings("unused")
-public class PostCart{
+public class PostToken{
 	@Post(level = jcrystal.json.JsonLevel.NORMAL)
 	public static class Normal implements java.io.Serializable{
 		public Normal(){}
-		public double subtotal;
-		public double total;
+		public long rol;
 		public Normal(org.json.JSONObject json){
-			this.subtotal = json.optDouble("subtotal");
-			this.total = json.optDouble("total");
+			this.rol = json.optLong("rol", 0);
 		}
 		public static Normal getFromNormal(org.json.JSONObject json){
 			if(json == null){
@@ -26,7 +24,7 @@ public class PostCart{
 			}
 			return ret;
 		}
-		public static java.util.List<Normal> getFromNormal(java.util.List<Cart> data){
+		public static java.util.List<Normal> getFromNormal(java.util.List<Token> data){
 			if(data == null){return null;}
 			java.util.ArrayList<Normal> ret = new java.util.ArrayList<>(data.size());
 			for(int pos = 0; pos < data.size(); pos++){
@@ -34,29 +32,21 @@ public class PostCart{
 			}
 			return ret;
 		}
-		public Normal(dev.jcrystal.crystalfash.entities.Cart entidad){
-			this.subtotal = entidad.subtotal();
-			this.total = entidad.total();
+		public Normal(dev.jcrystal.crystalfash.security.Token entidad){
+			this.rol = entidad.rol();
 		}
-		public dev.jcrystal.crystalfash.entities.Cart merge(dev.jcrystal.crystalfash.entities.Cart entidad){
-			entidad.subtotal(this.subtotal);
-			entidad.total(this.total);
+		public dev.jcrystal.crystalfash.security.Token merge(dev.jcrystal.crystalfash.security.Token entidad){
+			entidad.rol(this.rol);
 			return entidad;
 		}
-		public dev.jcrystal.crystalfash.entities.Cart create(){
-			return merge(new dev.jcrystal.crystalfash.entities.Cart());
+		public dev.jcrystal.crystalfash.security.Token create(String token){
+			return merge(new dev.jcrystal.crystalfash.security.Token(token));
 		}
-		public void setSubtotal(double subtotal){
-			this.subtotal = subtotal;
+		public void setRol(long rol){
+			this.rol = rol;
 		}
-		public double getSubtotal(){
-			return this.subtotal;
-		}
-		public void setTotal(double total){
-			this.total = total;
-		}
-		public double getTotal(){
-			return this.total;
+		public long getRol(){
+			return this.rol;
 		}
 		public Normal validate(){
 			return this;

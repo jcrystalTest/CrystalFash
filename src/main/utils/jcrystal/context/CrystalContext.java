@@ -14,10 +14,10 @@ public class CrystalContext{
 		}
 		return ret;
 	}
-	private jcrystal.context.DataStoreContext DefaultDB;
-	public jcrystal.context.DataStoreContext DefaultDB(){
+	private jcrystal.context.GoogleDatastore DefaultDB;
+	public jcrystal.context.GoogleDatastore DefaultDB(){
 		if(DefaultDB == null){
-			DefaultDB = new jcrystal.context.DataStoreContext();
+			DefaultDB = new jcrystal.context.GoogleDatastore();
 		}
 		return DefaultDB;
 	}

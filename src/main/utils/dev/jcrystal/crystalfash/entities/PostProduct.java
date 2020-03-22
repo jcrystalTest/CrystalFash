@@ -1,38 +1,10 @@
 package dev.jcrystal.crystalfash.entities;
 import jcrystal.reflection.annotations.Post;
 import jcrystal.datetime.*;
-import dev.jcrystal.crystalfash.entities.Categories;
-import dev.jcrystal.crystalfash.entities.Color;
-import dev.jcrystal.crystalfash.entities.Size;
 @SuppressWarnings("unused")
 public class PostProduct{
-	@Post(level = jcrystal.json.JsonLevel.MIN)
-	public static class Min implements java.io.Serializable{
-		public Min(){}
-		public Long id;
-		public Min(org.json.JSONObject json){
-			this.id = json.has("id")&&!json.isNull("id")?json.getLong("id"):null;
-		}
-		public Min(dev.jcrystal.crystalfash.entities.Product entidad){
-		}
-		public dev.jcrystal.crystalfash.entities.Product merge(dev.jcrystal.crystalfash.entities.Product entidad){
-			return entidad;
-		}
-		public dev.jcrystal.crystalfash.entities.Product create(){
-			return merge(new dev.jcrystal.crystalfash.entities.Product());
-		}
-		public void setId(Long id){
-			this.id = id;
-		}
-		public Long getId(){
-			return this.id;
-		}
-		public Min validate(){
-			return this;
-		}
-	}
 	@Post(level = jcrystal.json.JsonLevel.NORMAL)
-	public static class Normal extends Min implements java.io.Serializable{
+	public static class Normal implements java.io.Serializable{
 		public Normal(){}
 		public String name;
 		public String description;
@@ -44,19 +16,39 @@ public class PostProduct{
 		public dev.jcrystal.crystalfash.entities.Size size;
 		public String image;
 		public Normal(org.json.JSONObject json){
-			super(json);
 			this.name = json.has("name")&&!json.isNull("name")?json.getString("name"):null;
 			this.description = json.has("description")&&!json.isNull("description")?json.getString("description"):null;
-			this.category = json.has("category")&&!json.isNull("category")?Categories.fromId(json.getInt("category")):null;
+			this.category = json.has("category")&&!json.isNull("category")?dev.jcrystal.crystalfash.entities.UtilsCategories.fromId(json.getInt("category")):null;
 			this.price = json.optDouble("price");
 			this.discount = json.optDouble("discount");
 			this.oldPrice = json.optDouble("oldPrice");
-			this.color = json.has("color")&&!json.isNull("color")?Color.fromId(json.getInt("color")):null;
-			this.size = json.has("size")&&!json.isNull("size")?Size.fromId(json.getInt("size")):null;
+			this.color = json.has("color")&&!json.isNull("color")?dev.jcrystal.crystalfash.entities.UtilsColor.fromId(json.getInt("color")):null;
+			this.size = json.has("size")&&!json.isNull("size")?dev.jcrystal.crystalfash.entities.UtilsSize.fromId(json.getInt("size")):null;
 			this.image = json.has("image")&&!json.isNull("image")?json.getString("image"):null;
 		}
+		public static Normal getFromNormal(org.json.JSONObject json){
+			if(json == null){
+				return null;
+			}
+			return new Normal(json);
+		}
+		public static java.util.List<Normal> getFromNormal(org.json.JSONArray json){
+			if(json == null){return null;}
+			java.util.ArrayList<Normal> ret = new java.util.ArrayList<>(json.length());
+			for(int pos = 0; pos < json.length(); pos++){
+				ret.add(new Normal(json.getJSONObject(pos)));
+			}
+			return ret;
+		}
+		public static java.util.List<Normal> getFromNormal(java.util.List<Product> data){
+			if(data == null){return null;}
+			java.util.ArrayList<Normal> ret = new java.util.ArrayList<>(data.size());
+			for(int pos = 0; pos < data.size(); pos++){
+				ret.add(new Normal(data.get(pos)));
+			}
+			return ret;
+		}
 		public Normal(dev.jcrystal.crystalfash.entities.Product entidad){
-			super(entidad);
 			this.name = entidad.name();
 			this.description = entidad.description();
 			this.category = entidad.category();
@@ -68,7 +60,6 @@ public class PostProduct{
 			this.image = entidad.image();
 		}
 		public dev.jcrystal.crystalfash.entities.Product merge(dev.jcrystal.crystalfash.entities.Product entidad){
-			super.merge(entidad);
 			entidad.name(this.name);
 			entidad.description(this.description);
 			entidad.category(this.category);
@@ -138,7 +129,6 @@ public class PostProduct{
 			return this.image;
 		}
 		public Normal validate(){
-			super.validate();
 			return this;
 		}
 	}

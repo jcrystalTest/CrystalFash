@@ -1,3 +1,3 @@
 package jcrystal.context;
-public class GoogleDatastore{
+public class GoogleDatastore extends jcrystal.context.DataStoreContext{
 }

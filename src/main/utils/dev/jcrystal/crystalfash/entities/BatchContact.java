@@ -13,16 +13,12 @@ public class BatchContact{
 	public static java.util.List<Contact> get(java.util.Collection<Long> it){
 		if(it == null || it.isEmpty()){return new java.util.ArrayList<>();}
 		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-		return $ctx.DefaultDB().service.get(null, new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Contact.Key.createRawKey(v); }}).values().stream().map(ent->new Contact(ent)).collect(java.util.stream.Collectors.toList());
+		return $ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Contact.Key.createRawKey(v); }}).values().stream().map(ent->new Contact(ent)).collect(java.util.stream.Collectors.toList());
 	}
 	public static java.util.List<Contact> getFromKeys(Iterable<com.google.appengine.api.datastore.Key> keys){
 		java.util.List<Contact> ret = new java.util.ArrayList<>();
 		for(com.google.appengine.api.datastore.Entity ent : jcrystal.context.CrystalContext.get().DefaultDB().service.get(null, keys).values())ret.add(new Contact(ent));
 		return ret;
-	}
-	public static java.util.List<Contact> getTxn(java.util.Collection<Long> it){
-		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();
-		return $ctx.DefaultDB().service.get($ctx.DefaultDB().getTxn(), new jcrystal.utils.IterableTransform<Long, com.google.appengine.api.datastore.Key>(it){ @Override public com.google.appengine.api.datastore.Key transform(Long v) { return Contact.Key.createRawKey(v); }}).values().stream().map(ent->new Contact(ent)).collect(java.util.stream.Collectors.toList());
 	}
 	public static void put(java.lang.Iterable<Contact> it){
 		jcrystal.context.CrystalContext $ctx = jcrystal.context.CrystalContext.get();

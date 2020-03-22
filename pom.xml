@@ -60,12 +60,17 @@
 		<dependency>
 			<groupId>com.github.gasotelo</groupId>
 			<artifactId>jCrystalUtils</artifactId>
-			<version>4e5338c250</version>
+			<version>1.0.0b</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.gasotelo</groupId>
 			<artifactId>CrystalGAEServerUtils</artifactId>
-			<version>3665e8f4b4</version>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>6.12.2</version>
 		</dependency>
 	</dependencies>
 	<build>

@@ -5,6 +5,12 @@ public class FileUploadDescriptor{
 	public FileUploadDescriptor(javax.servlet.http.Part $fileContentPart){
 		this.$fileContentPart = $fileContentPart;
 	}
+	public String getUserFileName(){
+		return $fileContentPart.getSubmittedFileName();
+	}
+	public long getSize(){
+		return $fileContentPart.getSize();
+	}
 	public void put(java.io.File file) throws IOException{
 		try(java.io.FileOutputStream fos = new java.io.FileOutputStream(file)){
 			jcrystal.utils.ServletUtils.copy(8*1024, $fileContentPart.getInputStream(), fos);
@@ -14,6 +20,9 @@ public class FileUploadDescriptor{
 		this.put(jcrystal.db.storage.StorageUtils.getDEFAULT_BUCKET(), path);
 	}
 	public void put(String bucketName, String path) throws IOException{
+		while(path.startsWith("/")){
+			path = path.substring(1);
+		}
 		com.google.appengine.tools.cloudstorage.GcsService gcsService = com.google.appengine.tools.cloudstorage.GcsServiceFactory.createGcsService();
 		com.google.appengine.tools.cloudstorage.GcsFileOptions instance = new com.google.appengine.tools.cloudstorage.GcsFileOptions.Builder().mimeType($fileContentPart.getContentType()).build();
 		com.google.appengine.tools.cloudstorage.GcsOutputChannel outputChannel = gcsService.createOrReplace(new com.google.appengine.tools.cloudstorage.GcsFilename(bucketName, path), instance);
